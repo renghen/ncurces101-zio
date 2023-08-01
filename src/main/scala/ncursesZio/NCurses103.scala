@@ -19,6 +19,10 @@ object NCurses103 extends ZIOAppDefault:
 
   def run =
     resource.flatMap { _ =>
-      ZIO.attempt(printw("hello world 2".toCStr)) *> ZIO.attempt(refresh()) *> ZIO.attempt(getch())
+      ZIO.attempt(move(5,10))  *>
+      ZIO.attempt(printw("location moved".toCStr)) *>
+      ZIO.attempt(mvprintw(10,10,"new location".toCStr)) *>
+      ZIO.attempt(refresh()) *>
+      ZIO.attempt(getch())
     }
 end NCurses103

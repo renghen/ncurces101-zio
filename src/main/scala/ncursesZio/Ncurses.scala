@@ -16,6 +16,10 @@ object Ncurses:
 
   def clear(): Unit = extern
 
+  def move(row : CInt, col : CInt) : CInt = extern
+
+  def mvprintw(row : CInt, col : CInt, str : CString) : CInt = extern
+
   @name("curs_set")
   def setCursorVisibility(visibility: CursorVisibility): CInt = extern
 
