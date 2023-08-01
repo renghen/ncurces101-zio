@@ -1,6 +1,17 @@
 package ncursesZio
 
-import scala.scalanative.unsafe.{CChar, CInt, CShort, CString, CStruct0, CVarArg, Ptr, extern, link, name}
+import scala.scalanative.unsafe.{
+  extern,
+  link,
+  name,
+  CChar,
+  CInt,
+  CShort,
+  CString,
+  CStruct0,
+  CVarArg,
+  Ptr,
+}
 
 @link("ncurses")
 @extern
@@ -16,9 +27,13 @@ object Ncurses:
 
   def clear(): Unit = extern
 
-  def move(row : CInt, col : CInt) : CInt = extern
+  def move(row: CInt, col: CInt): CInt = extern
 
-  def mvprintw(row : CInt, col : CInt, str : CString) : CInt = extern
+  def mvprintw(
+      row: CInt,
+      col: CInt,
+      str: CString,
+    ): CInt = extern
 
   @name("curs_set")
   def setCursorVisibility(visibility: CursorVisibility): CInt = extern

@@ -2,7 +2,6 @@ package ncursesZio
 
 import ncursesZio.NCurses101
 
-import scalanative.unsafe.CQuote
 import scalanative.unsafe.toCString
 import scalanative.unsafe.Zone
 

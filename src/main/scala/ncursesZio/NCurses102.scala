@@ -1,13 +1,12 @@
 package ncursesZio
 
-import scala.scalanative.unsafe.Ptr
-
-import ncursesZio.Ncursesh.Window
 import zio.{Console, Scope, Task, ZIO, ZIOAppDefault}
 
-import scalanative.unsafe.CQuote
-import scalanative.unsafe.toCString
 import ncursesZio.NCurses102
+import ncursesZio.Ncursesh.Window
+
+import scalanative.unsafe.Ptr
+import scalanative.unsafe.toCString
 
 object NCurses102 extends ZIOAppDefault:
   import Ncurses.*
