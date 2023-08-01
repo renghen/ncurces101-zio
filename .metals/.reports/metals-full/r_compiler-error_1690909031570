@@ -1,0 +1,74 @@
+file%3A%2F%2F%2Fhome%2Frenghen%2Fworkspace%2Fscala%2Fnative%2Fncurces101-zio%2Fsrc%2Fmain%2Fscala%2Fncurses101%2FNCurses102.scala:11: error: ; expected but : found
+object NCurses102 extends ZIOAppDefault:
+                                       ^
+occurred in the presentation compiler.
+
+action parameters:
+uri: file://<WORKSPACE>/src/main/scala/ncurses101/NCurses102.scala
+text:
+package ncurses101
+
+import scala.scalanative.unsafe.Ptr
+
+import ncurses101.Ncursesh.Window
+import zio.{Scope, Task, ZIO, ZIOAppArgs, ZIOAppDefault}
+
+import scalanative.unsafe.CQuote
+import scalanative.unsafe.toCString
+
+object NCurses102 extends ZIOAppDefault:
+  import Ncurses.*
+  import NativeUtils.*
+
+  val init: ZIO[Any, Throwable, Ptr[Window]] = ZIO.attempt(initialzeScreen())
+  def release(window: Ptr[Window])           = ZIO.succeed(endWindow())
+
+  val result = ZIO.acquireReleaseWith(init)(release) { res =>
+    ZIO.attempt(printw("hello world 2".toCStr)) *> ZIO.attempt(refresh()) *> ZIO.attempt(getch())
+  }
+
+  def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] =
+    result
+end NCurses102
+
+
+
+error stacktrace:
+scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:16)
+	scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:16)
+	scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	scala.meta.internal.parsers.Reporter.syntaxError(Reporter.scala:17)
+	scala.meta.internal.parsers.Reporter.syntaxError$(Reporter.scala:17)
+	scala.meta.internal.parsers.Reporter$$anon$1.syntaxError(Reporter.scala:22)
+	scala.meta.internal.parsers.ScalametaParser.syntaxErrorExpected(ScalametaParser.scala:367)
+	scala.meta.internal.parsers.ScalametaParser.expect(ScalametaParser.scala:369)
+	scala.meta.internal.parsers.ScalametaParser.accept(ScalametaParser.scala:373)
+	scala.meta.internal.parsers.ScalametaParser.acceptStatSep(ScalametaParser.scala:389)
+	scala.meta.internal.parsers.ScalametaParser.acceptStatSepOpt(ScalametaParser.scala:393)
+	scala.meta.internal.parsers.ScalametaParser.statSeqBuf(ScalametaParser.scala:4357)
+	scala.meta.internal.parsers.ScalametaParser.bracelessPackageStats$1(ScalametaParser.scala:4579)
+	scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$11(ScalametaParser.scala:4590)
+	scala.meta.internal.parsers.ScalametaParser.autoEndPos(ScalametaParser.scala:349)
+	scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$10(ScalametaParser.scala:4590)
+	scala.meta.internal.parsers.ScalametaParser.tryParse(ScalametaParser.scala:201)
+	scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$1(ScalametaParser.scala:4582)
+	scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:300)
+	scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:346)
+	scala.meta.internal.parsers.ScalametaParser.batchSource(ScalametaParser.scala:4550)
+	scala.meta.internal.parsers.ScalametaParser.$anonfun$source$1(ScalametaParser.scala:4543)
+	scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:300)
+	scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:346)
+	scala.meta.internal.parsers.ScalametaParser.source(ScalametaParser.scala:4543)
+	scala.meta.internal.parsers.ScalametaParser.entrypointSource(ScalametaParser.scala:4548)
+	scala.meta.internal.parsers.ScalametaParser.parseSourceImpl(ScalametaParser.scala:127)
+	scala.meta.internal.parsers.ScalametaParser.$anonfun$parseSource$1(ScalametaParser.scala:124)
+	scala.meta.internal.parsers.ScalametaParser.parseRuleAfterBOF(ScalametaParser.scala:51)
+	scala.meta.internal.parsers.ScalametaParser.parseRule(ScalametaParser.scala:46)
+	scala.meta.internal.parsers.ScalametaParser.parseSource(ScalametaParser.scala:124)
+	scala.meta.parsers.Parse$.$anonfun$parseSource$1(Parse.scala:29)
+	scala.meta.parsers.Parse$$anon$1.apply(Parse.scala:36)
+	scala.meta.parsers.Api$XtensionParseDialectInput.parse(Api.scala:25)
+	scala.meta.internal.semanticdb.scalac.ParseOps$XtensionCompilationUnitSource.toSource(ParseOps.scala:17)
+	scala.meta.internal.semanticdb.scalac.TextDocumentOps$XtensionCompilationUnitDocument.toTextDocument(TextDocumentOps.scala:206)
+	scala.meta.internal.pc.SemanticdbTextDocumentProvider.textDocument(SemanticdbTextDocumentProvider.scala:54)
+	scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$semanticdbTextDocument$1(ScalaPresentationCompiler.scala:350)
