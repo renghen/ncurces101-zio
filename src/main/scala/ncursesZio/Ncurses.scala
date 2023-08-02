@@ -1,6 +1,17 @@
 package ncursesZio
 
-import scala.scalanative.unsafe.{CChar, CInt, CShort, CString, CStruct0, CVarArg, Ptr, extern, link, name}
+import scala.scalanative.unsafe.{
+  extern,
+  link,
+  name,
+  CChar,
+  CInt,
+  CShort,
+  CString,
+  CStruct0,
+  CVarArg,
+  Ptr,
+}
 
 @link("ncurses")
 @extern
@@ -47,6 +58,9 @@ object Ncurses:
   @name("wnoutrefresh")
   def refreshWindow(window: Ptr[Window]): CInt = extern
 
+  @name("wrefresh")
+  def wRefresh(window: Ptr[Window]): CInt = extern
+
   def doupdate(): CInt = extern
 
   def box(
@@ -54,6 +68,8 @@ object Ncurses:
       verch: ChType,
       horch: ChType,
     ): CInt = extern
+
+  def wprintw(window: Ptr[Window], str: CString): CInt = extern
 
   @name("mvwprintw")
   def printFormatted(

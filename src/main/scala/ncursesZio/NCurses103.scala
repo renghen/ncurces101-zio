@@ -9,9 +9,7 @@ import scalanative.unsafe.Ptr
 object NCurses103 extends ZIOAppDefault:
   import Ncurses.*
   import NativeUtils.*
-
-  def init(): ZIO[Any, Throwable, Ptr[Window]] = ZIO.attempt(initialzeScreen())
-  def release(window: Ptr[Window])             = ZIO.succeed(endWindow())
+  import NCursesUtils.*
 
   val resource = ZIO.acquireRelease(init())(release)
 
