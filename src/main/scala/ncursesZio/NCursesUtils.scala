@@ -2,9 +2,9 @@ package ncursesZio
 
 import scala.scalanative.unsafe.Ptr
 
-import zio.ZIO
+import zio.{Console, ZIO}
 
-import ncursesZio.Ncurses.{deleteWindow, endWindow, initialzeScreen, newWindow}
+import ncursesZio.Ncurses.{deleteWindow, endWindow, getch, initialzeScreen, newWindow}
 import ncursesZio.Ncursesh.Window
 
 object NCursesUtils {
