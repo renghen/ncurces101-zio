@@ -1,17 +1,6 @@
 package ncursesZio
 
-import scala.scalanative.unsafe.{
-  extern,
-  link,
-  name,
-  CChar,
-  CInt,
-  CShort,
-  CString,
-  CStruct0,
-  CVarArg,
-  Ptr,
-}
+import scala.scalanative.unsafe.{CChar, CInt, CShort, CString, CStruct0, CVarArg, Ptr, extern, link, name}
 
 @link("ncurses")
 @extern
